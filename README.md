@@ -8,7 +8,7 @@ The package ravapi provides a library/wrapper to the Alpha Vantage API if the us
 
 ## Installation
 
-You can install the released version of ravapi from [CRAN](https://CRAN.R-project.org) with:
+You can install the current dev version with the devtools package:
 
 ``` r
 devtools::install_github("shill1729/ravapi")

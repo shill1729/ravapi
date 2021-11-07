@@ -4,12 +4,20 @@
 \alias{getStock}
 \title{Download historical stock prices as a time-series from AV}
 \usage{
-getStock(symbol, period = "daily", datatype = "json", key = "premium")
+getStock(
+  symbol,
+  period = "daily",
+  interval = NULL,
+  datatype = "json",
+  key = "premium"
+)
 }
 \arguments{
 \item{symbol}{stock ticker to look up}
 
 \item{period}{period: "intraday", "daily", "weekly", "monthly"}
+
+\item{interval}{NULL for anything but intraday otherwise "1min", "5min", "15min", "30min", "60min"}
 
 \item{datatype}{"json" or "csv"}
 
@@ -22,5 +30,5 @@ parsed json or csv file
 {Wrapper to AV API. Requires free or premium key.}
 }
 \details{
-{Default 1 min for intraday, full output size, and adjusted.}
+{The argument 'interval' is only to be specified for period = 'intraday'.}
 }

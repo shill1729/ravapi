@@ -4,10 +4,21 @@
 \alias{getCoin}
 \title{Download daily time series of cryptocurrency from Alpha-Vantage}
 \usage{
-getCoin(symbol = "BTC", market = "USD", datatype = "json", key = "premium")
+getCoin(
+  symbol = "BTC",
+  period = "daily",
+  interval = NULL,
+  market = "USD",
+  datatype = "json",
+  key = "premium"
+)
 }
 \arguments{
 \item{symbol}{cryptocurrency symbol, i.e. "BTC" (string)}
+
+\item{period}{"daily", "weekly", "monthly", "yearly", or "intraday"}
+
+\item{interval}{NULL for anything but intraday otherwise "1min", "5min", "15min", "30min", "60min"}
 
 \item{market}{physical currency symbol for quoting i.e. "USD", "CNY", etc.}
 

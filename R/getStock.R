@@ -2,15 +2,15 @@
 #'
 #' @param symbol stock ticker to look up
 #' @param period period: "intraday", "daily", "weekly", "monthly"
+#' @param interval NULL for anything but intraday otherwise "1min", "5min", "15min", "30min", "60min"
 #' @param datatype "json" or "csv"
 #' @param key "premium" or "free"; the type of API key obtained from AV
 #'
 #' @description {Wrapper to AV API. Requires free or premium key.}
-#' @details {Default 1 min for intraday, full output size, and adjusted.}
+#' @details {The argument 'interval' is only to be specified for period = 'intraday'.}
 #'
 #' @return parsed json or csv file
-#' @export getStock
-getStock <- function(symbol, period = "daily", datatype = "json", key = "premium")
+getStock <- function(symbol, period = "daily", interval = NULL, datatype = "json", key = "premium")
 {
   # Input-error handling
   if(key != "premium" && key != "free")
@@ -18,6 +18,7 @@ getStock <- function(symbol, period = "daily", datatype = "json", key = "premium
     stop("argument 'key' must be either 'premium' or 'free'")
   }
   apikey <- paste(key, "_api_key", sep = "")
+  per <- ""
 
   # For daily, weekly, monthly, we append need to pass x_adjusted
   if(period == "daily" || period == "weekly" || period == "monthly")
@@ -37,10 +38,20 @@ getStock <- function(symbol, period = "daily", datatype = "json", key = "premium
   # For intraday add interval resolution, for else add adjusted boolean
   if(period == "intraday")
   {
-    payload$interval = "1min"
+    if(is.null(interval))
+    {
+      stop("interval must be non-null for period='intraday'")
+    }
+    if(!interval %in% c("1min", "5min", "15min", "30min", "60min"))
+    {
+      stop("interval must be one of '1min', '5min', '15min', '30min', or '60min' for intraday")
+    }
+    payload$interval <- interval
+
 
   } else if(period %in% c("daily", "weekly", "monthly"))
   {
+    # Always pull adjusted price data
     payload$adjusted = TRUE
   }
   # GET request

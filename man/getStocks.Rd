@@ -4,12 +4,14 @@
 \alias{getStocks}
 \title{Load multiple stocks into a single time-series/matrix}
 \usage{
-getStocks(symbols, period = "daily", key = "premium")
+getStocks(symbols, period = "daily", interval = NULL, key = "premium")
 }
 \arguments{
 \item{symbols}{list of stock symbols to look up}
 
 \item{period}{resolution between prices: "daily", "weekly", "monthly"}
+
+\item{interval}{NULL for anything but intraday otherwise "1min", "5min", "15min", "30min", "60min"}
 
 \item{key}{"premium" or "free"; the type of API key obtained from AV}
 }
