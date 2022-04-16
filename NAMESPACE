@@ -3,5 +3,6 @@
 export(getAssets)
 export(getCompanyOverview)
 export(getStockQuote)
+export(timescale)
 importFrom(assertthat,assert_that)
 importFrom(stats,complete.cases)

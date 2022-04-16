@@ -1,6 +1,6 @@
 Package: ravapi
 Type: Package
-Title: An R wrapper to Alpha Vantage's API for downloading financial time-series data.
+Title: An R wrapper to Alpha Vantage's API for downloading financial time-series data
 Version: 0.1.1
 Author: S. Hill
 Maintainer: S. Hill <52792611+shill1729@users.noreply.github.com>
