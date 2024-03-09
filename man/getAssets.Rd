@@ -8,6 +8,8 @@ getAssets(
   symbols,
   period = "daily",
   interval = NULL,
+  market = "USD",
+  crypto = FALSE,
   datatype = "json",
   key = "premium"
 )
@@ -18,6 +20,10 @@ getAssets(
 \item{period}{period: "intraday", "daily", "weekly", "monthly"}
 
 \item{interval}{NULL for anything but intraday otherwise "1min", "5min", "15min", "30min", "60min"}
+
+\item{market}{only needed for crypto: use "USD", "CNY", "EUR", etc}
+
+\item{crypto}{boolean for downloading crypto}
 
 \item{datatype}{"json" or "csv"}
 

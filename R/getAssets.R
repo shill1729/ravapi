@@ -3,6 +3,8 @@
 #' @param symbols vector of stock ticker or coin symbols to download
 #' @param period period: "intraday", "daily", "weekly", "monthly"
 #' @param interval NULL for anything but intraday otherwise "1min", "5min", "15min", "30min", "60min"
+#' @param market only needed for crypto: use "USD", "CNY", "EUR", etc
+#' @param crypto boolean for downloading crypto
 #' @param datatype "json" or "csv"
 #' @param key "premium" or "free"; the type of API key obtained from AV
 #'
@@ -13,24 +15,24 @@
 #'
 #' @return xts object
 #' @export getAssets
-getAssets <- function(symbols, period = "daily", interval = NULL, datatype = "json", key = "premium")
+getAssets <- function(symbols, period = "daily", interval = NULL, market="USD", crypto=FALSE, datatype = "json", key = "premium")
 {
   coins <- c("BTC", "ETH", "ETC", "LTC", "DOGE")
   num_assets <- length(symbols)
   if(num_assets == 1)
   {
-    if(symbols %in% c(coins))
+    if(crypto)
     {
-      return(getCoin(symbols, period, interval, market = "USD", datatype, key))
+      return(getCoin(symbols, period, interval, market = market, datatype, key))
     } else
     {
       return(getStock(symbols, period, interval, datatype, key))
     }
   } else if(num_assets > 1)
   {
-    if(symbols[1] %in% coins)
+    if(crypto)
     {
-      return(getCoins(symbols, period, interval, key))
+      return(getCoins(symbols, period, interval, market, key))
     } else
     {
       return(getStocks(symbols, period, interval, key))

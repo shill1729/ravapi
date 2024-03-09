@@ -3,12 +3,13 @@
 #' @param symbols list of cryptocurrency symbols to look up
 #' @param period "daily", "weekly", "monthly", "yearly", or "intraday"
 #' @param interval NULL for anything but intraday otherwise "1min", "5min", "15min", "30min", "60min"
+#' @param market currency to quote in, "USD", "CNY", "EUR", etc
 #' @param key "premium" or "free"; the type of API key obtained from AV
 #'
 #' @description {Returns common sample of historical prices of given portfolio of cryptocurrencies.}
 #' @return xts
 #' @importFrom stats complete.cases
-getCoins <- function(symbols, period = "daily", interval = NULL, key = "premium")
+getCoins <- function(symbols, period = "daily", interval = NULL, market="USD", key = "premium")
 {
   if(key == "premium")
   {
@@ -22,7 +23,7 @@ getCoins <- function(symbols, period = "daily", interval = NULL, key = "premium"
   for(i in 1:length(tickers))
   {
     print(tickers[i])
-    coins[[i]] <- getCoin(symbol = tickers[i], period = period, interval = interval, key = key)$close
+    coins[[i]] <- getCoin(symbol = tickers[i], period = period, interval = interval, market=market, key = key)$close
     if(i%%callLimit==0)
     {
       Sys.sleep(60)

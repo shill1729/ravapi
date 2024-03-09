@@ -4,7 +4,13 @@
 \alias{getCoins}
 \title{Load multiple cryptocurrencies}
 \usage{
-getCoins(symbols, period = "daily", interval = NULL, key = "premium")
+getCoins(
+  symbols,
+  period = "daily",
+  interval = NULL,
+  market = "USD",
+  key = "premium"
+)
 }
 \arguments{
 \item{symbols}{list of cryptocurrency symbols to look up}
@@ -12,6 +18,8 @@ getCoins(symbols, period = "daily", interval = NULL, key = "premium")
 \item{period}{"daily", "weekly", "monthly", "yearly", or "intraday"}
 
 \item{interval}{NULL for anything but intraday otherwise "1min", "5min", "15min", "30min", "60min"}
+
+\item{market}{currency to quote in, "USD", "CNY", "EUR", etc}
 
 \item{key}{"premium" or "free"; the type of API key obtained from AV}
 }
