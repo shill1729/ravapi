@@ -3,12 +3,13 @@
 #' @param symbols list of stock symbols to look up
 #' @param period resolution between prices: "daily", "weekly", "monthly"
 #' @param interval NULL for anything but intraday otherwise "1min", "5min", "15min", "30min", "60min"
+#' @param adjusted boolean for adjusted prices
 #' @param key "premium" or "free"; the type of API key obtained from AV
 #'
 #' @description {Returns common sample of historical prices of given portfolio.}
 #' @return xts
 #' @importFrom stats complete.cases
-getStocks <- function(symbols, period = "daily", interval = NULL, key = "premium")
+getStocks <- function(symbols, period = "daily", interval = NULL, adjusted=TRUE, key = "premium")
 {
   if(key == "premium")
   {
@@ -22,10 +23,10 @@ getStocks <- function(symbols, period = "daily", interval = NULL, key = "premium
   for(i in 1:length(tickers))
   {
     print(tickers[i])
-    if(period != "intraday")
+    if(period != "intraday" && adjusted)
     {
       stocks[[i]] <- getStock(symbol = tickers[i], period = period, interval = interval, key = key)$adj_close
-    } else
+    } else if(period == "intraday" || !adjusted)
     {
       stocks[[i]] <- getStock(symbol = tickers[i], period = period, interval = interval, key = key)$close
     }

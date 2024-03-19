@@ -10,6 +10,7 @@ getAssets(
   interval = NULL,
   market = "USD",
   crypto = FALSE,
+  adjusted = TRUE,
   datatype = "json",
   key = "premium"
 )
@@ -24,6 +25,8 @@ getAssets(
 \item{market}{only needed for crypto: use "USD", "CNY", "EUR", etc}
 
 \item{crypto}{boolean for downloading crypto}
+
+\item{adjusted}{boolean for adjusted prices}
 
 \item{datatype}{"json" or "csv"}
 

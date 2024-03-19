@@ -5,6 +5,7 @@
 #' @param interval NULL for anything but intraday otherwise "1min", "5min", "15min", "30min", "60min"
 #' @param market only needed for crypto: use "USD", "CNY", "EUR", etc
 #' @param crypto boolean for downloading crypto
+#' @param adjusted boolean for adjusted prices
 #' @param datatype "json" or "csv"
 #' @param key "premium" or "free"; the type of API key obtained from AV
 #'
@@ -15,7 +16,7 @@
 #'
 #' @return xts object
 #' @export getAssets
-getAssets <- function(symbols, period = "daily", interval = NULL, market="USD", crypto=FALSE, datatype = "json", key = "premium")
+getAssets <- function(symbols, period = "daily", interval = NULL, market="USD", crypto=FALSE, adjusted=TRUE, datatype = "json", key = "premium")
 {
   coins <- c("BTC", "ETH", "ETC", "LTC", "DOGE")
   num_assets <- length(symbols)
@@ -35,7 +36,7 @@ getAssets <- function(symbols, period = "daily", interval = NULL, market="USD", 
       return(getCoins(symbols, period, interval, market, key))
     } else
     {
-      return(getStocks(symbols, period, interval, key))
+      return(getStocks(symbols, period, interval, adjusted, key))
     }
   } else{
     stop("Must past a non-zero list of symbols")
