@@ -64,10 +64,13 @@ getCoin <- function(symbol = "BTC", period = "daily", interval = NULL, market = 
     time_points <- rownames(dat)
     dat <- apply(dat, 2, as.numeric)
     dat <- data.frame(time = time_points, dat)
+    # print(colnames(dat))
     if(period != "intraday")
     {
-      dat <- dat[, c(1, (1:5)*2, 11)]
-      colnames(dat) <- c("time", "open", "high", "low", "close", "volume", "market_cap")
+      # As of 1/20/2024, this fails
+      # dat <- dat[, c(1, (1:5)*2, 11)]
+      # colnames(dat) <- c("time", "open", "high", "low", "close", "volume", "market_cap")
+      colnames(dat) <- c("time", "open", "high", "low", "close", "volume")
     } else{
       colnames(dat) <- c("time", "open", "high", "low", "close", "volume")
     }
